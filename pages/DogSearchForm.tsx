@@ -1,29 +1,23 @@
-import React from 'react';
+import React from 'react'
+import { Dog } from '../utils/typings'
+import DataTable, { TableColumn } from 'react-data-table-component';
 
-interface DogSearchFormProps {
-  filter: string;
-  sortOrder: 'asc' | 'desc';
-  onFilterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSortOrderChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+type Props = {
+  dogs: Dog[],
 }
 
-const DogSearchForm: React.FC<DogSearchFormProps> = ({
-  filter,
-  sortOrder,
-  onFilterChange,
-  onSortOrderChange,
-}) => {
+function DogSearchForm({ dogs }: Props) {
+  // const keys: string[] = Object.keys(dogs[0])
+  // keys.map((key) => { return { name: key, selector: key, sortable: true } })
+  // console.log(keys)
   return (
-    <div>
-      <label htmlFor="filter">Filter by breed:</label>
-        <input type="text" id="filter" value={filter} onChange={onFilterChange} />
-        <label htmlFor="sortOrder">Sort by:</label>
-        <select id="sortOrder" value={sortOrder} onChange={onSortOrderChange}>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-    </div>
-    );
-};
+    // <DataTable
+    //     columns={}
+    //     data={}
+    // />
+    <div className="flex flex-col items-center justify-center">
+      </div>
+  )
+}
 
-export default DogSearchForm;
+export default DogSearchForm

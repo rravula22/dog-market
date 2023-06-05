@@ -32,7 +32,7 @@ export const logoutAuth = async () => {
     return data;  
 }
 
-export const getDogs = async (breeds: [], zipCodes: [], ageMin: number, ageMax: number) => {
+export const getDogs = async (breeds: String[], zipCodes: String[], ageMin: number, ageMax: number) => {
     const path =  "http://" + process.env.NEXT_PUBLIC_BASE_URL + '/api/dogs';
     const myURL = new URL(path);
     const response = await fetch(myURL.href, {
@@ -67,7 +67,7 @@ export const getBreeds = async () => {
     return data;  
 }
 
-export const getZipCodes = async () => {
+export const    getZipCodes = async () => {
     const path =  "http://" + process.env.NEXT_PUBLIC_BASE_URL + '/api/breeds';
     const myURL = new URL(path);
     const response = await fetch(myURL.href, {

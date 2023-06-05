@@ -1,5 +1,127 @@
+import { IncomingHttpHeaders } from 'http';
 import type { NextApiRequest, NextApiResponse } from 'next'
-
+const breeds: Array<String> = [
+  "Affenpinscher",
+  "Afghan Hound",
+  "African Hunting Dog",
+  "Airedale",
+  "American Staffordshire Terrier",
+  "Appenzeller",
+  "Australian Terrier",
+  "Basenji",
+  "Basset",
+  "Beagle",
+  "Bedlington Terrier",
+  "Bernese Mountain Dog",
+  "Black-and-tan Coonhound",
+  "Blenheim Spaniel",
+  "Bloodhound",
+  "Bluetick",
+  "Border Collie",
+  "Border Terrier",
+  "Borzoi",
+  "Boston Bull",
+  "Bouvier Des Flandres",
+  "Boxer",
+  "Brabancon Griffon",
+  "Briard",
+  "Brittany Spaniel",
+  "Bull Mastiff",
+  "Cairn",
+  "Cardigan",
+  "Chesapeake Bay Retriever",
+  "Chihuahua",
+  "Chow",
+  "Clumber",
+  "Cocker Spaniel",
+  "Collie",
+  "Curly-coated Retriever",
+  "Dandie Dinmont",
+  "Dhole",
+  "Dingo",
+  "Doberman",
+  "English Foxhound",
+  "English Setter",
+  "English Springer",
+  "EntleBucher",
+  "Eskimo Dog",
+  "Flat-coated Retriever",
+  "French Bulldog",
+  "German Shepherd",
+  "German Short-haired Pointer",
+  "Giant Schnauzer",
+  "Golden Retriever",
+  "Gordon Setter",
+  "Great Dane",
+  "Great Pyrenees",
+  "Greater Swiss Mountain Dog",
+  "Groenendael",
+  "Ibizan Hound",
+  "Irish Setter",
+  "Irish Terrier",
+  "Irish Water Spaniel",
+  "Irish Wolfhound",
+  "Italian Greyhound",
+  "Japanese Spaniel",
+  "Keeshond",
+  "Kelpie",
+  "Kerry Blue Terrier",
+  "Komondor",
+  "Kuvasz",
+  "Labrador Retriever",
+  "Lakeland Terrier",
+  "Leonberg",
+  "Lhasa",
+  "Malamute",
+  "Malinois",
+  "Maltese Dog",
+  "Mexican Hairless",
+  "Miniature Pinscher",
+  "Miniature Poodle",
+  "Miniature Schnauzer",
+  "Newfoundland",
+  "Norfolk Terrier",
+  "Norwegian Elkhound",
+  "Norwich Terrier",
+  "Old English Sheepdog",
+  "Otterhound",
+  "Papillon",
+  "Pekinese",
+  "Pembroke",
+  "Pomeranian",
+  "Pug",
+  "Redbone",
+  "Rhodesian Ridgeback",
+  "Rottweiler",
+  "Saint Bernard",
+  "Saluki",
+  "Samoyed",
+  "Schipperke",
+  "Scotch Terrier",
+  "Scottish Deerhound",
+  "Sealyham Terrier",
+  "Shetland Sheepdog",
+  "Shih-Tzu",
+  "Siberian Husky",
+  "Silky Terrier",
+  "Soft-coated Wheaten Terrier",
+  "Staffordshire Bullterrier",
+  "Standard Poodle",
+  "Standard Schnauzer",
+  "Sussex Spaniel",
+  "Tibetan Mastiff",
+  "Tibetan Terrier",
+  "Toy Poodle",
+  "Toy Terrier",
+  "Vizsla",
+  "Walker Hound",
+  "Weimaraner",
+  "Welsh Springer Spaniel",
+  "West Highland White Terrier",
+  "Whippet",
+  "Wire-haired Fox Terrier",
+  "Yorkshire Terrier"
+]
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -9,19 +131,23 @@ export default async function handler(
     return res.status(405).json({ message: 'Method not allowed' })
   }
 
-  // call api to get dogs fetch from env variable
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/dogs/breeds`, {
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  })
-  const data = await response.json()
+
+  // let requestOptions: RequestInit = {
+  //   method: 'GET',
+  //   redirect: 'follow',
+  //   credentials: 'include',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'cookie': req.headers.cookie || ''
+  //   },
+  // };
+  // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/dogs/breeds`, requestOptions)
+  //pass breeds array to data object
+  const data = breeds
   // check if response is ok
-  if (!response.ok) {
-    return res.status(422).json(data)
-  }
+  // if (!response.ok) {
+  //   return res.status(422).json(data)
+  // }
   // return success
   return res.status(200).json(data)
 }

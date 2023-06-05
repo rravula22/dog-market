@@ -26,6 +26,8 @@ export default async function handler(
     },
     body: JSON.stringify({ name, email }),
   })
+  
+  // check if response is ok
   if (!response.ok) {
     return res.status(422).json({ message: 'Invalid credentials.' })
   }
