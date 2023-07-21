@@ -1,4 +1,4 @@
-
+import { Dog, Location, ZipCode } from './typings'
 export const loginAuth = async (email: String, name: String) => {
     const path = "http://" + process.env.NEXT_PUBLIC_BASE_URL + '/api/login';
     const myURL = new URL(path);
@@ -67,7 +67,7 @@ export const getBreeds = async () => {
     return data;  
 }
 
-export const    getZipCodes = async () => {
+export const getZipCodes = async () => {
     const path =  "http://" + process.env.NEXT_PUBLIC_BASE_URL + '/api/breeds';
     const myURL = new URL(path);
     const response = await fetch(myURL.href, {

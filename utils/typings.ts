@@ -16,4 +16,10 @@ interface Location {
     county: string
 }
 
-export type { Dog, Location }
+interface ZipCode {
+    zipCode: string;
+    city: string;
+    state: string;
+}
+
+export type { Dog, Location, ZipCode }

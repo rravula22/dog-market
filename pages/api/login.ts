@@ -1,6 +1,6 @@
 // api for login
 import type { NextApiRequest, NextApiResponse } from 'next'
-
+import GlobalParameter from '../../utils/singletonCookie';
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -29,9 +29,15 @@ export default async function handler(
   
   // check if response is ok
   if (!response.ok) {
-    return res.status(422).json({ message: 'Invalid credentials.' })
+    return res.status(422).json({  message: 'Invalid credentials.' })
   }
-
+  let cookieSet = GlobalParameter.getInstance();
   // return success
-  return res.status(200).json({ message: 'Success' })
+  if(response.headers.get('Set-Cookie')) {
+    cookieSet.setValue(response.headers.get('Set-Cookie') || '');
+  }
+  return res.status(200)
+  .setHeader('cookie', response.headers.get('Set-Cookie') || '')
+  .json({ message: 'Success' });
+
 }

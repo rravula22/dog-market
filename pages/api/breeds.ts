@@ -1,5 +1,5 @@
-import { IncomingHttpHeaders } from 'http';
 import type { NextApiRequest, NextApiResponse } from 'next'
+import GlobalParameter from '../../utils/singletonCookie';
 const breeds: Array<String> = [
   "Affenpinscher",
   "Afghan Hound",
@@ -131,24 +131,25 @@ export default async function handler(
     return res.status(405).json({ message: 'Method not allowed' })
   }
 
+  let cookieSet = GlobalParameter.getInstance();
 
-  // let requestOptions: RequestInit = {
-  //   method: 'GET',
-  //   redirect: 'follow',
-  //   credentials: 'include',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'cookie': req.headers.cookie || ''
-  //   },
-  // };
-  // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/dogs/breeds`, requestOptions)
+  let requestOptions: RequestInit = {
+    method: 'GET',
+    redirect: 'follow',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': cookieSet.getValue() || ''
+    },
+  };
+  const response =await fetch(`${process.env.NEXT_PUBLIC_API_URL}/dogs/breeds`, requestOptions)
   //pass breeds array to data object
   const data = breeds
   // check if response is ok
-  // if (!response.ok) {
-  //   return res.status(422).json(data)
-  // }
-  // return success
+  console.log(response.status)
+  if (!response.ok) {
+    return res.status(422).json(data)
+  }
   return res.status(200).json(data)
 }
 

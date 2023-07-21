@@ -1,8 +1,9 @@
 import React from 'react';
+import { Worker } from 'worker_threads';
 
 type Props = {
-    breeds: string[],
-    selectedOptions: string[],
+    breeds: String[],
+    selectedOptions: String[],
     handleBreedsChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -36,11 +37,11 @@ export default ({breeds, selectedOptions, handleBreedsChange}: Props) => {
           <option value="" disabled selected>
             Select a breed
           </option>
-          {breeds.map((breed) => (
-            <option className='text-gray-700' value={breed}>{breed}</option>
+          {breeds.map((breed: any) => (
+            <option className='text-gray-700' key={breed} value={breed}>{breed}</option>
           ))}
         </select>
-    </div>
+      </div>
     );
   }
 
